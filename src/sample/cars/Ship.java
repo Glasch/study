@@ -12,6 +12,8 @@ public class Ship {
     private boolean isBarge;
     private Location location = new Location(10, 15);
 
+    //test
+
     public Ship(int deadWeight, int power, @NotNull String name) {
         this.deadWeight = deadWeight;
         if (deadWeight <= 0) {
