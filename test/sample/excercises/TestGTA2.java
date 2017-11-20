@@ -136,6 +136,26 @@ public class TestGTA2 extends TestCase {
         assertEquals(0, gta2.getSecondPlayerValue());
     }
 
+    // между игроками нечетное количество ячеек
+    public void testGTA2_25(){
+        int[] array = {1,2,3,4,5,6,7,8,9,11};
+        GTA2 gta2 = new GTA2();
+        gta2.playGTA2(2, 0, array);
+        assertEquals(55, gta2.getFirstPlayerValue());
+        assertEquals(1, gta2.getSecondPlayerValue());
+    }
+
+    // между игроками четное количество ячеек
+    public void testGTA2_26(){
+        int[] array = {1,2,3,4,5,6,7,8,9,11};
+        GTA2 gta2 = new GTA2();
+        gta2.playGTA2(3, 0, array);
+        assertEquals(53, gta2.getFirstPlayerValue());
+        assertEquals(3, gta2.getSecondPlayerValue());
+    }
+
+
+
     // ТЕСТЫ НЕЧЕТНОГО МАССИВА
 
 
@@ -262,6 +282,57 @@ public class TestGTA2 extends TestCase {
         assertEquals(0, gta2.getSecondPlayerValue());
 
     }
+
+ //-------------------------------------------------------------
+
+    // Новые тесты
+
+    // Между ними четное колл-во 1>2
+
+    public void testGTA2_40(){
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        GTA2 gta2 = new GTA2();
+        gta2.playGTA2(4, 1, array);
+        assertEquals(40 , gta2.getFirstPlayerValue());
+        assertEquals(5 , gta2.getSecondPlayerValue());
+
+    }
+
+    //  Между ними четное колл-во 1<2
+    public void testGTA2_41(){
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        GTA2 gta2 = new GTA2();
+        gta2.playGTA2(1, 4, array);
+        assertEquals(5 , gta2.getFirstPlayerValue());
+        assertEquals(40 , gta2.getSecondPlayerValue());
+
+    }
+
+    // Между ними НЕчетное колл-во 1>2
+
+    public void testGTA2_42(){
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        GTA2 gta2 = new GTA2();
+        gta2.playGTA2(4,2 , array);
+        assertEquals(40 , gta2.getFirstPlayerValue());
+        assertEquals(5 , gta2.getSecondPlayerValue());
+
+    }
+
+    //  Между ними НЕчетное колл-во 1<2
+    public void testGTA2_43(){
+        int[] array = {1,2,3,4,5,6,7,8,9};
+        GTA2 gta2 = new GTA2();
+        gta2.playGTA2(2, 4, array);
+        assertEquals(9 , gta2.getFirstPlayerValue());
+        assertEquals(36 , gta2.getSecondPlayerValue());
+
+    }
+
+
+
+
+
 
 
 }

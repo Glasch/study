@@ -14,20 +14,22 @@ public class GTA2 {
 
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        String nextLine = in.nextLine();
-        int[] ints = parseIntLine(nextLine, 1);
-        int length = ints[0];
+        Scanner scanner = new Scanner(System.in);
 
-        nextLine = in.nextLine();
-        int[] srcArray = parseIntLine(nextLine, length);
+        int charSize = scanner.nextInt();
 
-        nextLine = in.nextLine();
-        ints = parseIntLine(nextLine, 2);
+        int[] array = new int[charSize];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        int firstIndex = scanner.nextInt() - 1;
+
+        int secondIndex = scanner.nextInt() - 1;
 
         GTA2 gta2 = new GTA2();
-        gta2.playGTA2(ints[0], ints[1], srcArray);
-        System.out.printf("%d %d", gta2.getFirstPlayerValue(), gta2.getSecondPlayerValue());
+        gta2.playGTA2(firstIndex, secondIndex, array);
+
     }
 
 
