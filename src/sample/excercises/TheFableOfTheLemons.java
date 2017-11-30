@@ -1,35 +1,84 @@
 package sample.excercises;
 
+import java.math.BigInteger;
+import java.util.Scanner;
+
 /**
  * Copyright (c) Anton on 15.11.2017.
  */
 public class TheFableOfTheLemons {
 
-    int countVariants(int inText, int repeatsInARawPossible) throws IllegalArgumentException {
 
-        if (inText < 1 || inText > 10000) {
-            throw new IllegalArgumentException(" inText is out of range ");
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int inText = scanner.nextInt();
+        int repeatsInARawPossible = scanner.nextInt();
+
+        TheFableOfTheLemons theFableOfTheLemons = new TheFableOfTheLemons();
+        System.out.println(theFableOfTheLemons.countVariants(inText, repeatsInARawPossible));
+
+
+    }
+
+    BigInteger countVariants(int inText, int repeatsInARawPossible) {
+
+        if (repeatsInARawPossible == 0) {
+            return BigInteger.valueOf(1);
         }
 
-        if (repeatsInARawPossible < 0 || repeatsInARawPossible > inText) {
-            throw new IllegalArgumentException(" repeatsInARawPossible is out of range ");
-        }
 
-        if (repeatsInARawPossible == 0){
-            return  1;
-        }
+        BigInteger result;
+        BigInteger first = BigInteger.valueOf(2).pow(inText);
+
+        BigInteger repeats = countRepeats(inText, repeatsInARawPossible);
 
 
-        int result = 0;
+        BigInteger second = BigInteger.valueOf(2).pow(inText - repeatsInARawPossible);
 
-        result = (int) (Math.pow(2, inText) - Math.pow(2, (inText - repeatsInARawPossible)));
+        result = first.subtract(second).subtract(repeats);
 
-        if (inText == repeatsInARawPossible) {
-            result += 1;
-        }
-
+        result = result.add(BigInteger.ONE);
 
         return result;
 
     }
+
+    private BigInteger countRepeats(int inText, int repeatsInaRawPossible) {
+        int repeats = 0;
+        int n = inText - repeatsInaRawPossible;
+        int nFactor = 1;
+        for (int i = 1; i <= n; i++) {
+            nFactor = nFactor * i;
+        }
+
+
+        int k;
+
+        for (int j = 2; j < n; j++) {
+            k = j;
+            int kFactor = 1;
+            for (int z = 1; z <= k; z++) {
+                kFactor = kFactor * z;
+            }
+            int sub = n - k;
+            int subFactor = 1;
+            for (int x = 1; x <= sub; x++) {
+                subFactor = subFactor * x;
+            }
+
+            int allVariants = nFactor / ((subFactor) * (kFactor));
+            int noRepeats = n - j + 1;
+
+            repeats = repeats + (allVariants - noRepeats);
+        }
+
+
+        return BigInteger.valueOf(repeats);
+    }
+
+
 }
+
+

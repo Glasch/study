@@ -31,4 +31,13 @@ public class TestSeaBattle extends TestCase {
 
     }
 
+
+    public void testSeaBattle3(){
+        SeaBattle2 seaBattle2 = new SeaBattle2(4,4);
+        seaBattle2.addShip(new SeaBattle2.Ship(1,2,2,true));
+        seaBattle2.addShip(new SeaBattle2.Ship(3,1,2,false));
+        assertEquals(4,seaBattle2.countPlacements(1));
+
+    }
+
 }
