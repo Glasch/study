@@ -35,7 +35,7 @@ public class TestTheFableOfLemons extends TestCase {
 //                    {
                         long timeSpent = System.currentTimeMillis() - startTime;
                         System.out.println(" Correct!" + " " + timeSpent + " мс ");
-//                    }
+//   //                 }
                 }
             }
         }}
