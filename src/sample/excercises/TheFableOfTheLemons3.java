@@ -22,13 +22,6 @@ public class TheFableOfTheLemons3 {
 
     }
 
-//    private int repeatsInRowPossible;
-//    private int inText;
-//
-//    public TheFableOfTheLemons3() {
-//        this.repeatsInRowPossible = repeatsInRowPossible;
-//        this.inText = inText;
-//    }
 
     public BigInteger countVariants(int inText, int repeatsInRowPossible) {
         this.repeatsInRowPossible = repeatsInRowPossible;
@@ -61,17 +54,6 @@ public class TheFableOfTheLemons3 {
         return count;
     }
 
-//    private BigInteger countPlacementsIgnoreRepeats(int inText_sub, int wordLength) {
-//        if (wordLength>inText_sub){
-//            return BigInteger.ZERO;
-//        }
-//        BigInteger tech = BigInteger.valueOf(inText_sub - wordLength + 1);
-//       // try {
-//            return BigInteger.valueOf(2).pow(inText_sub - wordLength).multiply(tech);
-//        //} catch (Exception e) {
-//        //    throw new IllegalStateException(e);
-//       // }
-//    }
 
     private BigInteger calcLeftOptions(int indexStartOfWord, int wordLength) {
         return countVariants(indexStartOfWord-1,repeatsInRowPossible+1, wordLength-1);
@@ -82,18 +64,6 @@ public class TheFableOfTheLemons3 {
         return countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
     }
 
-//    private BigInteger __calcOptions(int tailLength, boolean ignoreInvalid) {
-//        if (tailLength <= 0) {
-//            return BigInteger.ONE;
-//        }
-//        BigInteger totalOptions = BigInteger.valueOf(2).pow(tailLength);
-//        if(ignoreInvalid){
-//            return totalOptions;
-//        }
-//
-//        BigInteger invalidOptions =  countIllegalVariants(tailLength, repeatsInRowPossible + 1);
-//        return totalOptions.subtract(invalidOptions);
-//    }
 
 
 }
