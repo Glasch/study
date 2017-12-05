@@ -17,7 +17,7 @@ public class TestTheFableOfLemons extends TestCase {
                 if (i >= j) {
                     System.out.println("ВХОДНЫЕ ДАННЫЕ " + i + " " + j);
                     TheFableOfLemonsStupid theFableOfLemonsStupid = new TheFableOfLemonsStupid(i, j);
-                    BigInteger stupid = theFableOfLemonsStupid.testTFoL();
+//                    BigInteger stupid = theFableOfLemonsStupid.testTFoL();
                   //  System.out.println(theFableOfLemonsStupid.testTFoL());
                     TheFableOfTheLemons3 theFableOfTheLemons3 = new TheFableOfTheLemons3();
                     BigInteger clever = theFableOfTheLemons3.countVariants(i,j);
@@ -26,7 +26,7 @@ public class TestTheFableOfLemons extends TestCase {
 //                    if (!stupid.equals(clever)){
                         System.out.println("---------------------------------------");
                         System.out.println("n = " + i + " k =  " + j);
-                        System.out.println("True Result = " + stupid);
+//                        System.out.println("True Result = " + stupid);
                         System.out.println("I count = " + clever);
 //                    }
 
@@ -49,6 +49,13 @@ public class TestTheFableOfLemons extends TestCase {
        System.out.println(thaFableOfTheLemons3.countVariants(6, 1));
 
    }
+
+    public void testTFoL3_Perf(){
+        TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
+        long t = System.currentTimeMillis();
+        System.out.println(thaFableOfTheLemons3.countVariants(300, 1));
+        System.out.println("Time: " + (System.currentTimeMillis()-t));
+    }
 
 }
 

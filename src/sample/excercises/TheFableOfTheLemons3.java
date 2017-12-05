@@ -1,6 +1,8 @@
 package sample.excercises;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -8,7 +10,10 @@ import java.util.Scanner;
  */
 public class TheFableOfTheLemons3 {
 
+    public static final BigInteger TWO = BigInteger.valueOf(2);
     private int repeatsInRowPossible;
+
+    private HashMap<Long, BigInteger> optionsCache = new HashMap<>(1000000);
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -43,59 +48,38 @@ public class TheFableOfTheLemons3 {
         for (int i = minK; i <= maxK; i++) {
             illegal = illegal.add(countIllegalVariants(inText, i));
         }
-        BigInteger all = BigInteger.valueOf(2).pow(inText);
+        BigInteger all = TWO.pow(inText);
         return all.subtract(illegal);
     }
 
     private BigInteger countIllegalVariants(int inText, int wordLength) {
+        BigInteger cached = optionsCache.get((long)inText * 10000 + wordLength);
+        if(cached != null){
+            return cached;
+        }
         if(inText == wordLength){
             return BigInteger.ONE;
         }
         BigInteger count = BigInteger.ZERO;
         for (int i = 0; i <= inText - wordLength; i++) {
-            BigInteger left = calcLeftOptions(i, wordLength);
-            BigInteger right = calcRightOptions(inText, i, wordLength);
+            BigInteger left = countVariants(i-1, repeatsInRowPossible+1, wordLength-1);
 
+            int tailLength = inText - i - wordLength;
+            BigInteger right = countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
             count = count.add(left.multiply(right));
         }
+        optionsCache.put((long)inText * 10000 + wordLength, count);
         return count;
     }
 
-//    private BigInteger countPlacementsIgnoreRepeats(int inText_sub, int wordLength) {
-//        if (wordLength>inText_sub){
-//            return BigInteger.ZERO;
-//        }
-//        BigInteger tech = BigInteger.valueOf(inText_sub - wordLength + 1);
-//       // try {
-//            return BigInteger.valueOf(2).pow(inText_sub - wordLength).multiply(tech);
-//        //} catch (Exception e) {
-//        //    throw new IllegalStateException(e);
-//       // }
+//    private BigInteger calcLeftOptions(int indexStartOfWord, int wordLength) {
+//        return countVariants(indexStartOfWord-1,repeatsInRowPossible+1, wordLength-1);
 //    }
-
-    private BigInteger calcLeftOptions(int indexStartOfWord, int wordLength) {
-        return countVariants(indexStartOfWord-1,repeatsInRowPossible+1, wordLength-1);
-    }
-
-    private BigInteger calcRightOptions(int inText, int indexStartOfWord, int wordLength) {
-        int tailLength = inText - indexStartOfWord - wordLength;
-        return countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
-    }
-
-//    private BigInteger __calcOptions(int tailLength, boolean ignoreInvalid) {
-//        if (tailLength <= 0) {
-//            return BigInteger.ONE;
-//        }
-//        BigInteger totalOptions = BigInteger.valueOf(2).pow(tailLength);
-//        if(ignoreInvalid){
-//            return totalOptions;
-//        }
 //
-//        BigInteger invalidOptions =  countIllegalVariants(tailLength, repeatsInRowPossible + 1);
-//        return totalOptions.subtract(invalidOptions);
+//    private BigInteger calcRightOptions(int inText, int indexStartOfWord, int wordLength) {
+//        int tailLength = inText - indexStartOfWord - wordLength;
+//        return countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
 //    }
-
-
 }
 
 
