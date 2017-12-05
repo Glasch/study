@@ -53,8 +53,21 @@ public class TestTheFableOfLemons extends TestCase {
     public void testTFoL3_Perf(){
         TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
         long t = System.currentTimeMillis();
-        System.out.println(thaFableOfTheLemons3.countVariants(300, 1));
+        System.out.println(thaFableOfTheLemons3.countVariants(100, 1));
         System.out.println("Time: " + (System.currentTimeMillis()-t));
+        System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
+
+        thaFableOfTheLemons3 = new TheFableOfTheLemons3();
+        t = System.currentTimeMillis();
+        System.out.println(thaFableOfTheLemons3.countVariants(101, 2));
+        System.out.println("Time: " + (System.currentTimeMillis()-t));
+        System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
+
+        thaFableOfTheLemons3 = new TheFableOfTheLemons3();
+        t = System.currentTimeMillis();
+        System.out.println(thaFableOfTheLemons3.countVariants(102, 3));
+        System.out.println("Time: " + (System.currentTimeMillis()-t));
+        System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
     }
 
 }

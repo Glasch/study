@@ -23,7 +23,7 @@ public class TheFableOfTheLemons3 {
 
         TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
         System.out.println(thaFableOfTheLemons3.countVariants(repeatsInRowPossible, inText));
-
+        System.out.println(Runtime.getRuntime().totalMemory());
 
     }
 
