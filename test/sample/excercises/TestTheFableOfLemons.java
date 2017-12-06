@@ -49,8 +49,8 @@ public class TestTheFableOfLemons extends TestCase {
     }
 
     public void testTFoL4(){
-        int n = 4076;
-        int k = 2;
+        int n = 1000;
+        int k = 5;
 
 //        TheFableOfLemonsStupid theFableOfLemonsStupid = new TheFableOfLemonsStupid(n,k);
 //        System.out.println("STUPID " + theFableOfLemonsStupid.testTFoL());
