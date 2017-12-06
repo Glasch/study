@@ -27,14 +27,6 @@ public class TheFableOfTheLemons3 {
 
     }
 
-//    private int repeatsInRowPossible;
-//    private int inText;
-//
-//    public TheFableOfTheLemons3() {
-//        this.repeatsInRowPossible = repeatsInRowPossible;
-//        this.inText = inText;
-//    }
-
     public BigInteger countVariants(int inText, int repeatsInRowPossible) {
         this.repeatsInRowPossible = repeatsInRowPossible;
         return countVariants(inText, repeatsInRowPossible+1,inText);
@@ -62,24 +54,32 @@ public class TheFableOfTheLemons3 {
         }
         BigInteger count = BigInteger.ZERO;
         for (int i = 0; i <= inText - wordLength; i++) {
-            BigInteger left = countVariants(i-1, repeatsInRowPossible+1, wordLength-1);
-
-            int tailLength = inText - i - wordLength;
-            BigInteger right = countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
-            count = count.add(left.multiply(right));
+            count = count.add(countIllegalVariantForIndex(inText, wordLength, i));
         }
         optionsCache.put((long)inText * 10000 + wordLength, count);
         return count;
     }
 
-//    private BigInteger calcLeftOptions(int indexStartOfWord, int wordLength) {
-//        return countVariants(indexStartOfWord-1,repeatsInRowPossible+1, wordLength-1);
-//    }
-//
-//    private BigInteger calcRightOptions(int inText, int indexStartOfWord, int wordLength) {
-//        int tailLength = inText - indexStartOfWord - wordLength;
-//        return countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
-//    }
+    public BigInteger countIllegalVariantForIndex(int inText, int wordLength, int i) {
+        BigInteger left = countVariants(i-1, repeatsInRowPossible+1, wordLength-1);
+
+        int tailLength = inText - i - wordLength;
+        BigInteger right = countVariants(tailLength-1,repeatsInRowPossible+1, wordLength);
+        return left.multiply(right);
+    }
+
+    public BigInteger countIllegalVariantForIndexEXP(int inText, int wordLength, int i) {
+        BigInteger left = countVariants(i-1, repeatsInRowPossible+1, wordLength-1);
+
+        int tailLength = inText - i - wordLength;
+        BigInteger right = countVariants(tailLength-1,repeatsInRowPossible+1, wordLength-1);
+        return left.multiply(right);
+    }
+
+
+
 }
+
+
 
 

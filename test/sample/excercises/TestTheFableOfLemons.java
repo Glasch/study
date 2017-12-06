@@ -43,31 +43,37 @@ public class TestTheFableOfLemons extends TestCase {
        System.out.println(theFableOfTheLemons.countVariants(6,1));
    }
 
-   public void testTFoL3(){
+    public void testTFoL3(){
+        TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
+        System.out.println(thaFableOfTheLemons3.countVariants(6, 1));
+    }
 
-       TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
-       System.out.println(thaFableOfTheLemons3.countVariants(6, 1));
+    public void testTFoL4(){
+        int n = 4076;
+        int k = 2;
 
-   }
+//        TheFableOfLemonsStupid theFableOfLemonsStupid = new TheFableOfLemonsStupid(n,k);
+//        System.out.println("STUPID " + theFableOfLemonsStupid.testTFoL());
+
+//        TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
+//        System.out.println("FTL3 " + thaFableOfTheLemons3.countVariants(n, k));
+
+        TheFableOfLemons4 lemons4 = new TheFableOfLemons4();
+        long t = System.currentTimeMillis();
+        BigInteger full = lemons4.countVariants(n, k);
+        System.out.println("FTL4 " + full);
+        System.out.println("Time: " + (System.currentTimeMillis()-t));
+        System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
+    }
 
     public void testTFoL3_Perf(){
         TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
         long t = System.currentTimeMillis();
-        System.out.println(thaFableOfTheLemons3.countVariants(100, 1));
+        BigInteger full = thaFableOfTheLemons3.countVariants(10, 1);
+        System.out.println(full);
         System.out.println("Time: " + (System.currentTimeMillis()-t));
         System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
 
-        thaFableOfTheLemons3 = new TheFableOfTheLemons3();
-        t = System.currentTimeMillis();
-        System.out.println(thaFableOfTheLemons3.countVariants(101, 2));
-        System.out.println("Time: " + (System.currentTimeMillis()-t));
-        System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
-
-        thaFableOfTheLemons3 = new TheFableOfTheLemons3();
-        t = System.currentTimeMillis();
-        System.out.println(thaFableOfTheLemons3.countVariants(102, 3));
-        System.out.println("Time: " + (System.currentTimeMillis()-t));
-        System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
     }
 
 }
