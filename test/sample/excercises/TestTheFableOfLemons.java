@@ -37,11 +37,13 @@ public class TestTheFableOfLemons extends TestCase {
 
    public void testVarints(){
 
-        TheFableOfLemonsStupid theFableOfLemonsStupid = new TheFableOfLemonsStupid(6,1);
+        TheFableOfLemonsStupid theFableOfLemonsStupid = new TheFableOfLemonsStupid(100,100);
        System.out.println(theFableOfLemonsStupid.testTFoL());
-        TheFableOfTheLemons theFableOfTheLemons = new TheFableOfTheLemons();
-       System.out.println(theFableOfTheLemons.countVariants(6,1));
-   }
+       TheFableOfLemons5 theFableOfLemons5= new TheFableOfLemons5();
+       System.out.println(theFableOfLemons5.countLegalVariants(100,100));
+//        TheFableOfTheLemons theFableOfTheLemons = new TheFableOfTheLemons();
+//       System.out.println(theFableOfTheLemons.countVariants(5,1));
+  }
 
     public void testTFoL3(){
         TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
@@ -49,8 +51,8 @@ public class TestTheFableOfLemons extends TestCase {
     }
 
     public void testTFoL4(){
-        int n = 1000;
-        int k = 5;
+        int n = 10;
+        int k = 2;
 
 //        TheFableOfLemonsStupid theFableOfLemonsStupid = new TheFableOfLemonsStupid(n,k);
 //        System.out.println("STUPID " + theFableOfLemonsStupid.testTFoL());
@@ -69,10 +71,19 @@ public class TestTheFableOfLemons extends TestCase {
     public void testTFoL3_Perf(){
         TheFableOfTheLemons3 thaFableOfTheLemons3 = new TheFableOfTheLemons3();
         long t = System.currentTimeMillis();
-        BigInteger full = thaFableOfTheLemons3.countVariants(10, 1);
+        BigInteger full = thaFableOfTheLemons3.countVariants(100, 42);
         System.out.println(full);
         System.out.println("Time: " + (System.currentTimeMillis()-t));
         System.out.println("Memory Mb: " + (Runtime.getRuntime().totalMemory()/1024/1024));
+        TheFableOfLemons5 theFableOfLemons5= new TheFableOfLemons5();
+        System.out.println(theFableOfLemons5.countLegalVariants(100,42));
+
+    }
+
+    public void testTFoL5(){
+
+        TheFableOfLemons5 theFableOfLemons5 = new TheFableOfLemons5();
+        System.out.println(theFableOfLemons5.countLegalVariants(5, 2));
 
     }
 

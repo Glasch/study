@@ -15,7 +15,7 @@ import java.io.IOException;
 public class RatesClientTest extends TestCase {
 
     public void testUSDRates() {
-        ExchangeRatesLoader loader = new ExchangeRatesLoader();
+        sample.httpclient.ExchangeRatesLoader loader = new sample.httpclient.ExchangeRatesLoader();
         try {
             loader.updateRates();
         } catch (IOException e) {

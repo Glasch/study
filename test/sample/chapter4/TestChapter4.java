@@ -39,7 +39,7 @@ public class TestChapter4 extends TestCase {
     }
 
     public void testFibonacci() {
-        List<BigDecimal> fiboNumbers  = Fibonacci.findFiboNumbers(100);
+        List<BigDecimal> fiboNumbers  = Fibonacci.findFiboNumbers(6);
         for (BigDecimal fiboNumber : fiboNumbers) {
             System.out.println(fiboNumber);
         }
