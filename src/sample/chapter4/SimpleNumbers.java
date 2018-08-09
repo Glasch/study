@@ -1,21 +1,54 @@
 package sample.chapter4;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Copyright (c) Anton on 04.07.2017.
  */
 /* Ex.4 p. 131 */
 public class SimpleNumbers {
-    static void poisk(int maxNumber) {
+
+    static int poisk(int from, int to) {
         boolean simple;
-        for (int delimoe = 2; delimoe <= maxNumber; delimoe++) {
+        int count = 0;
+        for (int delimoe = from; delimoe <= to; delimoe++) {
             simple = checkSimple(delimoe);
             if (simple) {
-                System.out.println(delimoe);
+                count++;
             }
+        }
+        return count;
+    }
 
+
+    static int poiskParallel(int from ,int to, int threads) {
+        Map<Thread,ParallelSearcher> threadsMap = new HashMap<>();
+        boolean simple;
+        int step = (to - from) / threads;
+        int startIndex = from;
+        for (int i = 0; i < threads; i++) {
+            int endIndex = startIndex + step;
+            if(i == threads - 1){
+                endIndex = to;
+            }
+            ParallelSearcher parallelSearcher = new ParallelSearcher(startIndex, endIndex);
+            Thread thread = new Thread(parallelSearcher);
+            thread.start();
+            threadsMap.put(thread,parallelSearcher);
+            startIndex += step;
+        }
+        int result = 0;
+        for (Thread thread : threadsMap.keySet()) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new IllegalStateException();
+            }
+            result += threadsMap.get(thread).getCount();
 
         }
-
+        return result;
     }
 
     public static boolean checkSimple(int delimoe) {
@@ -26,5 +59,26 @@ public class SimpleNumbers {
         }
         return true;
     }
+
+    private static class ParallelSearcher implements Runnable {
+        private int from;
+        private int to;
+        private int count = 0;
+        public ParallelSearcher(int from, int to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        public void run() {
+            count = poisk(from, to);
+        }
+
+        public int getCount() {
+            return count;
+        }
+    }
+
+
 }
 

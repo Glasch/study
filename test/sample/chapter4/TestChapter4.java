@@ -24,8 +24,15 @@ public class TestChapter4 extends TestCase {
 
 
     public void testSimpleNumbers() {
-        SimpleNumbers.poisk(10000);
+        int res = SimpleNumbers.poisk(800000, 1000000);
+        System.out.println("res = " + res);
 
+    }
+
+    public void testParallelSimpleNubers(){
+        int res = SimpleNumbers.poiskParallel(800000,
+                1000000,3);
+        System.out.println("res = " + res);
     }
 
     public void testPodrOperIntToBinary() {
