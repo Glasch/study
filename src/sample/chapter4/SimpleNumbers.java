@@ -1,7 +1,9 @@
 package sample.chapter4;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.concurrent.*;
 
 /**
  * Copyright (c) Anton on 04.07.2017.
@@ -46,10 +48,36 @@ public class SimpleNumbers {
                 throw new IllegalStateException();
             }
             result += threadsMap.get(thread).getCount();
-
         }
         return result;
     }
+
+    static int poiskParallelTP(int from ,int to, int threads) {
+        ExecutorService threadPool = Executors.newFixedThreadPool(threads);
+        HashSet<Future<Integer>> futures = new HashSet<>();
+        int step = (to - from) / threads;
+        int startIndex = from;
+        for (int i = 0; i < threads; i++) {
+            int endIndex = startIndex + step;
+            if(i == threads - 1){
+                endIndex = to;
+            }
+            ParallelSearcherCall parallelSearcher = new ParallelSearcherCall(startIndex, endIndex);
+            Future<Integer> future = threadPool.submit(parallelSearcher);
+            futures.add(future);
+            startIndex += step;
+        }
+        int result = 0;
+        for (Future<Integer> future : futures) {
+            try {
+                 result += future.get();
+            } catch (Exception e) {
+               throw new IllegalStateException();
+            }
+        }
+        return result;
+    }
+
 
     public static boolean checkSimple(int delimoe) {
         for (int delitel = 2; delitel < delimoe; delitel++) {
@@ -79,6 +107,24 @@ public class SimpleNumbers {
         }
     }
 
+    private static class ParallelSearcherCall implements Callable<Integer> {
+        private int from;
+        private int to;
+        private int count = 0;
+        public ParallelSearcherCall(int from, int to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        public Integer call() {
+            return  poisk(from, to);
+        }
+
+        public int getCount() {
+            return count;
+        }
+    }
 
 }
 

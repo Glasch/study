@@ -1,6 +1,7 @@
 package sample.chapter4;
 
 import junit.framework.TestCase;
+import org.junit.Test;
 import sample.chapter3.PodrOper;
 
 import java.math.BigDecimal;
@@ -30,10 +31,22 @@ public class TestChapter4 extends TestCase {
     }
 
     public void testParallelSimpleNubers(){
+        int cores = Runtime.getRuntime().availableProcessors();
+        System.out.println("cores = " + cores);
         int res = SimpleNumbers.poiskParallel(800000,
-                1000000,3);
+                1000000,cores);
         System.out.println("res = " + res);
     }
+
+    @Test
+    public void parallelSimpleNubersTP(){
+        int cores = Runtime.getRuntime().availableProcessors();
+        System.out.println("cores = " + cores);
+        int res = SimpleNumbers.poiskParallelTP(800000,
+                1000000,cores);
+        System.out.println("res = " + res);
+    }
+
 
     public void testPodrOperIntToBinary() {
         // PodrOper.intToBinary(33);
