@@ -9,7 +9,7 @@ package sample.reflection;
 import java.lang.reflect.Field;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import sun.applet.Main;
 
 
 /*
@@ -38,8 +38,28 @@ public class MyJSONWriter {
     }
 
     public static void main(String[] args) {
+        Integer number = 0 ;
+        String site = " ";
+        Integer stake = 0;
+
+
+        for (int i = 0; i < args.length; i++) {
+            String arg = args[i];
+            if ("-number".equals(arg)){
+                 number = Integer.parseInt(args[i+1]) ;
+            }
+            if ("-site".equals(arg)){
+                 site = args[i+1];
+            }
+            if ("-limit".equals(arg)){
+                 stake = Integer.parseInt(args[i+1]);
+            }
+
+        }
+
         MyJSONWriter myJsonWriter = new MyJSONWriter();
-        Hand hand = new Hand(1,"PS",25);
+        Hand hand = new Hand(number,site,stake);
         myJsonWriter.write(hand);
+
     }
 }
