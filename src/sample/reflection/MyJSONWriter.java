@@ -1,29 +1,45 @@
 package sample.reflection;
 
+
+
+
+
+
+
 import java.lang.reflect.Field;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 
 /*
  * Author: glaschenko
  * Created: 06.09.2018
  */
-public class JSONWriter {
-    String write(Object object) {
+public class MyJSONWriter {
+    JSONObject write(Object object) {
         Field[] declaredFields = object.getClass().getDeclaredFields();
+        JSONObject jsonObject = new JSONObject();
         for (Field field : declaredFields) {
             if (field.isAnnotationPresent(JSONField.class)) {
                 try {
+                    field.setAccessible(true);
                     String annotationName = field.getAnnotation(JSONField.class).name();
+                    jsonObject.put(annotationName,field.get(object));
 
-                    System.out.println(field.getName() + " : " + field.get(object) + " : " + annotationName);
                 } catch (IllegalAccessException e) {
                     throw new IllegalStateException(e);
                 }
             }
 
         }
+        System.out.println(jsonObject);
+        return jsonObject;
+    }
 
-
-        return "";
-
+    public static void main(String[] args) {
+        MyJSONWriter myJsonWriter = new MyJSONWriter();
+        Hand hand = new Hand(1,"PS",25);
+        myJsonWriter.write(hand);
     }
 }

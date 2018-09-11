@@ -5,12 +5,12 @@ package sample.reflection;
  * Created: 06.09.2018
  */
 public class Hand {
-    @JSONField(name = "n")
-    Integer number;
-    @JSONField(name = "s")
-    String site;
-
-    Integer stake;
+    @JSONField(name = "id")
+    private Integer number;
+    @JSONField(name = "room")
+    private String site;
+    @JSONField(name = "limit")
+    private Integer stake;
 
     public Hand(Integer number, String site, Integer stake) {
 
