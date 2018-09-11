@@ -45,7 +45,6 @@ public class TestStreams extends TestCase {
         System.out.println("collect = " + collect);
     }
 
-
     private ArrayList<String> createArray() {
         ArrayList<String> strings = new ArrayList<>();
         Random random = new Random(9789);
